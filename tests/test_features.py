@@ -95,3 +95,6 @@ def test_use_in_function3():
 def test_misc1():
     a = [[1,2,3],[4,5,6],[7,8,9]] | Map(lambda x:x[2]) | list   
     assert a == [3,6,9]
+
+def test_reduce():
+    assert ([1,2,3,4,5] | Reduce(lambda x , y : x + y)) == 15

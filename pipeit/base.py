@@ -1,7 +1,9 @@
 from typing import Callable
 
 class PipeManagerEnd:
-    ...
+    
+    def __ror__(self , other):
+        return other
 
 class AbstractSelfModifiedClass:
     

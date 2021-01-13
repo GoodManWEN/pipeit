@@ -8,5 +8,6 @@ __all__ = (
     'PIPE',
     'END',
     'Filter',
-    'Map'
+    'Map',
+    'Reduce'
 )
