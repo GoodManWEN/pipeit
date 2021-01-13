@@ -7,6 +7,8 @@
 
 This is a super simple wrapper , let's use python functional programming like Unix pipe!
 
+Inspired by [abersheeran/only-pipe](https://github.com/abersheeran/only-pipe) , [czheo/syntax_sugar_python](https://github.com/czheo/syntax_sugar_python) , [pipetools](https://pypi.org/project/pipetools/)
+
 ## Install
 
     pip install pipeit
