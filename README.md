@@ -14,9 +14,10 @@ Inspired by [abersheeran/only-pipe](https://github.com/abersheeran/only-pipe) , 
     pip install pipeit
 
 ## Usage
-- Statements start with `PIPE` and end with `END`.
+- Statements start with `PIPE` and end with `END` **OR** you call functions with the first letter capital.
 - There're only two objects(`PIPE` & `END`) and three types(`Filter` ,`Map` & `Reduce`) in namespace, so feel free to use `from pipeit import *`.
 - Convert filter into tuple , e.g. `map(lambda x:x + 1) => (map , lambda x:x + 1)`
+- It'll be 10% ~ 20% slower using this wrapper than the original python way.
 
 ## Example
 
