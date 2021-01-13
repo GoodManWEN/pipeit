@@ -15,7 +15,7 @@ Inspired by [abersheeran/only-pipe](https://github.com/abersheeran/only-pipe) , 
 
 ## Usage
 - Statements start with `PIPE` and end with `END`.
-- There're only two object (`PIPE` & `END`)and two type(`Filter` & `Map`) in namespace, so feel free to use `from pipeit import *`.
+- There're only two objects(`PIPE` & `END`) and three types(`Filter` ,`Map` & `Reduce`) in namespace, so feel free to use `from pipeit import *`.
 - Convert filter into tuple , e.g. `map(lambda x:x + 1) => (map , lambda x:x + 1)`
 
 ## Example
