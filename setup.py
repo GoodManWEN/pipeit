@@ -19,7 +19,7 @@ def get_install_requires(filename):
 
 # 
 url = 'https://github.com/GoodManWEN/pipeit'
-release = f'{url}/releases/latest'
+release = '{}/releases/latest'.format(url)
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
     "Connection": "keep-alive",
@@ -33,8 +33,8 @@ html = BeautifulSoup(rget(release , headers).text ,'lxml')
 version = html.find('div',{'class':'release-header'}).find('a').text
 if ':' in version:
     version = version[:version.index(':')].strip()
-logger.info(f"description: {description}")
-logger.info(f"version: {version}")
+logger.info("description: {}".format(description))
+logger.info("version: {}".format(version))
 
 #
 with open('README.md','r',encoding='utf-8') as f:
@@ -50,7 +50,7 @@ with open('pipeit/__init__.py','r',encoding='utf-8') as f:
 
 for line in init_content:
     if line == "__version__ = ''\n":
-        long_description_lines_copy.append(f"__version__ = '{version}'\n")
+        long_description_lines_copy.append("__version__ = '{}'\n".format(version))
     else:
         long_description_lines_copy.append(line)
 
