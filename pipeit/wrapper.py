@@ -14,7 +14,14 @@ class Map(AbstractSelfModifiedClass):
 
 class Reduce(AbstractSelfModifiedClass):
 
+    def __init__(self , func , initial = None):
+        self._func = func
+        self._storage = None
+        self._initial = initial
+
     def _exec(self , _iter):
+        if self._initial:
+            return reduce(self._func , _iter , self._initial)
         return reduce(self._func , _iter)
 
     def __ror__(self , _iter):

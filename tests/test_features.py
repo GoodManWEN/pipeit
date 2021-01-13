@@ -98,3 +98,4 @@ def test_misc1():
 
 def test_reduce():
     assert ([1,2,3,4,5] | Reduce(lambda x , y : x + y)) == 15
+    assert ([1,2,3,4,5] | Reduce(lambda x , y : x + y , 25)) == 40
