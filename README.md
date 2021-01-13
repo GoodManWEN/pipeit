@@ -22,7 +22,7 @@ Inspired by [abersheeran/only-pipe](https://github.com/abersheeran/only-pipe) , 
 
 Some description.
 ```Python
->>> from pipit import PIPE , END
+>>> from pipit import PIPE , END , Map , Filter , Reduce
 
 >>> data = PIPE | range(10) | (map , lambda x:x + 1) | (map , str) | list | END
 >>> data
