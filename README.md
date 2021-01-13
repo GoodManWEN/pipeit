@@ -5,17 +5,16 @@
 [![Publish](https://github.com/GoodManWEN/pipeit/workflows/Publish/badge.svg)](https://github.com/GoodManWEN/pipeit/actions?query=workflow:Publish)
 [![Build](https://github.com/GoodManWEN/pipeit/workflows/Build/badge.svg)](https://github.com/GoodManWEN/pipeit/actions?query=workflow:Build)
 
-Some description.
-
-## Feature
-- Some feature.
+This is a super simple wrapper , let's use python functional programming like Unix pipe!
 
 ## Install
 
     pip install pipeit
 
 ## Usage
-Some description.
+- Statements start with `PIPE` and end with `END` , which are the only two object in the namespace.
+- So feel free to use `from pipeit import *`.
+- Convert filter into tuple , e.g. `map(lambda x:x + 1) => (map , lambda x:x + 1)`
 
 ## Example
 
@@ -25,6 +24,6 @@ from pipit import PIPE , END
 
 data = PIPE | range(10) | (map , lambda x:x + 1) | (map , str) | list | END
 print(data)
+func = lambda x: PIPE | range(x) | (map , lambda x:x + 1) | (map , str) | list | END
+print(func(10))
 ```
-
-A test of new branch
