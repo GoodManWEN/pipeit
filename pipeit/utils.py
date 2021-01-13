@@ -1,19 +1,19 @@
 from functools import partial
 from typing import Callable
+from .base import AbstractSelfModifiedClass , PipeManagerEnd
 
-class _pipe_end:
-    ...
-
-class _pipe_start:
+class PipeManager:
 
     def __init__(self):
         self._storage = None
 
     def __or__(self , other):
-        if isinstance(other , _pipe_end):
+        if isinstance(other , PipeManagerEnd):
             ret = self._storage
             self._storage = None
             return ret
+        elif isinstance(other , AbstractSelfModifiedClass):
+            self._storage = other._exec(self._storage)
         elif isinstance(other , tuple):
             self._storage = partial(*other)(self._storage)
         elif isinstance(other , Callable):
@@ -22,5 +22,5 @@ class _pipe_start:
             self._storage = other
         return self
 
-PIPE = _pipe_start()
-END = _pipe_end()
+PIPE = PipeManager()
+END = PipeManagerEnd()

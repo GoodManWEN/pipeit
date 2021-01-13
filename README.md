@@ -14,18 +14,34 @@ Inspired by [abersheeran/only-pipe](https://github.com/abersheeran/only-pipe) , 
     pip install pipeit
 
 ## Usage
-- Statements start with `PIPE` and end with `END` , which are the only two object in the namespace.
-- So feel free to use `from pipeit import *`.
+- Statements start with `PIPE` and end with `END`.
+- There're only two object (`PIPE` & `END`)and two type(`Filter` & `Map`) in namespace, so feel free to use `from pipeit import *`.
 - Convert filter into tuple , e.g. `map(lambda x:x + 1) => (map , lambda x:x + 1)`
 
 ## Example
 
 Some description.
 ```Python
-from pipit import PIPE , END
+>>> from pipit import PIPE , END
 
-data = PIPE | range(10) | (map , lambda x:x + 1) | (map , str) | list | END
-print(data)
-func = lambda x: PIPE | range(x) | (map , lambda x:x + 1) | (map , str) | list | END
-print(func(10))
+>>> data = PIPE | range(10) | (map , lambda x:x + 1) | (map , str) | list | END
+>>> data
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
+# (map , lambda x:x + 1) equals to Map(lambda x:x + 1)
+>>> func = lambda x: PIPE | range(x) | Map(lambda x:x + 1) | Map(str) | list | END
+>>> func(10)
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
+# Or you may want more easy use.
+>>> range(10) | Filter(lambda x:x<5) | list
+[0, 1, 2, 3, 4]
+
+>>> for _ in range(3) | Map(str):
+        print(repr(_))
+
+
+'0'
+'1'
+'2'
 ```
