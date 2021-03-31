@@ -3,8 +3,10 @@ __version__ = ''
 
 from .utils import *
 from .wrapper import *
+from .timer import timeit
 
 __all__ = (
+    'timeit',
     'PIPE',
     'END',
     'Filter',
