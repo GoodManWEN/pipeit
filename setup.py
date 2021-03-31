@@ -69,7 +69,6 @@ setup(
     install_requires = get_install_requires('requirements.txt'),
     classifiers=[
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
@@ -78,6 +77,6 @@ setup(
         'Operating System :: POSIX :: Linux',
         'Operating System :: Microsoft :: Windows',
     ],
-    python_requires='>=3.5',
+    python_requires='>=3.6',
     keywords=["pipeit" ,]
 )
