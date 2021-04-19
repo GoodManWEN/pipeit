@@ -32,8 +32,10 @@ Inspired by [abersheeran/only-pipe](https://github.com/abersheeran/only-pipe) , 
 >>> func = lambda x: PIPE | range(x) | Map(lambda x:x + 1) | Map(str) | list | END
 >>> func(10)
 ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+```
 
-# Or you may want more easy use.
+Or you may want a more easy use.
+```Python
 >>> range(10) | Filter(lambda x:x<5) | list
 [0, 1, 2, 3, 4]
 
