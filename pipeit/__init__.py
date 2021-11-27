@@ -4,6 +4,7 @@ __version__ = ''
 from .utils import *
 from .wrapper import *
 from .timer import timeit
+from .io import *
 
 __all__ = (
     'timeit',
@@ -11,5 +12,7 @@ __all__ = (
     'END',
     'Filter',
     'Map',
-    'Reduce'
+    'Reduce',
+    'Read',
+    'Write'
 )
