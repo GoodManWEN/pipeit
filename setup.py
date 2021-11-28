@@ -30,7 +30,7 @@ headers = {
 html = BeautifulSoup(rget(url , headers).text ,'lxml')
 description = html.find('meta' ,{'name':'description'}).get('content')
 html = BeautifulSoup(rget(release , headers).text ,'lxml')
-version = html.find('div',{'class':'release-header'}).find('a').text
+version = html.find('a', {'class': 'Link--muted'}).find('span').text.strip()
 if ':' in version:
     version = version[:version.index(':')].strip()
 logger.info("description: {}".format(description))
