@@ -50,7 +50,7 @@ Or you may want a more easy use.
 
 Code timer updated in version 2.0, you can easily detect the execution time of code blocks or statements.
 ```Python
-from pipit import *
+from pipeit import *
 from functools import reduce
 
 foo = list(range(100))
