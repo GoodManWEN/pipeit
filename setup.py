@@ -29,6 +29,9 @@ headers = {
 
 html = BeautifulSoup(rget(url , headers).text ,'lxml')
 description = html.find('meta' ,{'name':'description'}).get('content')
+for kw in (' - GitHub', ' - GoodManWEN'):
+    if ' - GitHub' in description:
+        description = description[:description.index(' - GitHub')]
 html = BeautifulSoup(rget(release , headers).text ,'lxml')
 version = html.find('a', {'class': 'Link--muted'}).find('span').text.strip()
 if ':' in version:
