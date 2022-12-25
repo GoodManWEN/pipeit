@@ -14,5 +14,7 @@ __all__ = (
     'Map',
     'Reduce',
     'Read',
-    'Write'
+    'Write',
+    'ReadB',
+    'WriteB'
 )
