@@ -74,7 +74,7 @@ with timeit(): # a handwritten for loop is required under context manager mode
 
 **Better IO functions are updated in version 0.3.0**. If you hate typing encoding="utf-8" over and over again, believe me, you'll love them.
 
-Use simple `Read()`/`Write()`/`ReadB()`/`WriteB()` functions instead of the default best practice of `with open()`. You can specify the encoding format, but they are specified as `utf-8` by default. Another advantage of doing this is that you no longer need to worry about accidentally emptying the file by not changing 'w' to 'r'.
+Use simple `Read()`/`Write()`/`ReadB()`/`WriteB()` functions instead of the default practice of `with open()`. You can specify the encoding format, but they are specified as `utf-8` by default. Another advantage of doing this is that you no longer need to worry about accidentally emptying the file by not changing 'w' to 'r'.
 
 Similarly, you can use pipes to send data to them, or pipes to receive data from them.
 
