@@ -19,8 +19,14 @@ Inspired by [abersheeran/only-pipe](https://github.com/abersheeran/only-pipe) , 
 - Convert filter into tuple or capital the first letter, e.g. `map(lambda x:x + 1) => (map , lambda x:x + 1)` or `Map(lambda x:x + 1)` , however **DO NOT MIX USE THEM**.
 - It'll be 10% ~ 20% faster using the original python functional way than using these wrappers.
 
-## Example
+v0.2.0 Update:
+- Simple code timing means
 
+v0.3.0 Update:
+- Easier reading and writing operations
+
+## Example
+**Basic useage**: 
 ```Python
 >>> from pipit import PIPE , END , Map , Filter , Reduce
 
@@ -48,7 +54,7 @@ Or you may want a more easy use.
 '2'
 ```
 
-Code timer updated in version 2.0, you can easily detect the execution time of code blocks or statements.
+**Code timer updated in version 0.2.0**, you can easily detect the execution time of code blocks or statements.
 ```Python
 from pipeit import *
 from functools import reduce
@@ -66,4 +72,31 @@ with timeit(): # a handwritten for loop is required under context manager mode
 # [line 8][exact] time cost: 7.0519098s 
 ```
 
+**Better IO functions are updated in version 0.3.0**. If you hate typing encoding="utf-8" over and over again, believe me, you'll love them.
 
+Use simple `Read()`/`Write()`/`ReadB()`/`WriteB()` functions instead of the default best practice of `with open()`. You can specify the encoding format, but they are specified as `utf-8` by default. Another advantage of doing this is that you no longer need to worry about accidentally emptying the file by not changing 'w' to 'r'.
+
+Similarly, you can use pipes to send data to them, or pipes to receive data from them.
+
+```Python
+from pipeit import *
+import json
+
+# 
+Write("a.txt", "Hello World!")
+WriteB("b.json", "[1, 2, 3]".encode("utf-8"))
+assert Read("a.txt") == "Hello World!"
+assert ReadB("b.txt") == b"[1, 2, 3]"
+
+# OR
+"[1, 2, 3]".encode("utf-8") | WriteB("b.json")
+
+# another typical scenario is to cache data to hard disk and read it back again
+html_a = "abc" # requests.get("https://a.example.com").text
+html_b = "123" # ...
+htmls = {"html_a": html_a, "html_b": html_b}
+json.dumps(htmls) | Write("htmls.json")
+# 
+htmls = Read("htmls.json") | json.loads
+html_a, html_b = htmls.values()
+```
