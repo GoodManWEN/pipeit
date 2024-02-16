@@ -16,7 +16,7 @@ except AttributeError:
 
 class _Bytecode:
     def __init__(self):
-        code = (lambda: x if x else y).__code__.co_code
+        code = (lambda x,y: x if x else y).__code__.co_code
         opcode, oparg = struct.unpack_from('BB', code, 2)
         # Starting with Python 3.6, the bytecode format has changed, using
         # 16-bit words (8-bit opcode + 8-bit argument) for each instruction,
@@ -268,7 +268,7 @@ class timeit:
                 args.insert(1, code.co_kwonlyargcount)  # PY3
             except AttributeError:
                 pass
-            return types.CodeType(*args)
+            return CodeType(*args)
 
     def _patch_code(self, code: CodeType, code_asm: list[tuple[str, int, int]]) -> CodeType:
         buf = array.array('B', [x for y in [[dis.opname.index(x[0]), x[1]] for x in code_asm] for x in y])
