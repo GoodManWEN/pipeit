@@ -69,7 +69,7 @@ def test_write_encoding():
             assert f.read() == 'abc123_你好世界'
     
     try:
-        Write('test.txt', 'abc123_你好世界', encoding='ansi')
+        Write('test.txt', 'abc123_你好世界', encoding='gbk')
     except Exception as e:
         no_raise = False
     else:
@@ -85,7 +85,7 @@ def test_write_encoding():
         assert not no_raise
 
         try:
-            with open('test.txt', 'r', encoding='ansi') as f:
+            with open('test.txt', 'r', encoding='gbk') as f:
                 assert f.read() == 'abc123_你好世界'
         except UnicodeDecodeError as e:
             no_raise = False
@@ -111,7 +111,7 @@ def test_write_pipe():
     with open('test.txt', 'r', encoding='utf-8') as f:
         assert f.read() == 'abc123_你好世界'
 
-    'abc123_你好世界' | Write('test.txt', encoding="ansi")
+    'abc123_你好世界' | Write('test.txt', encoding="gbk")
 
     no_raise = True
     try:
@@ -121,7 +121,7 @@ def test_write_pipe():
         no_raise = False
     assert not no_raise
 
-    with open('test.txt', 'r', encoding='ansi') as f:
+    with open('test.txt', 'r', encoding='gbk') as f:
         assert f.read() == 'abc123_你好世界'
 
     raise_msg = ''
@@ -155,7 +155,7 @@ def test_read():
 
     no_raise = True
     try:
-        text = Read('test.txt', encoding='ansi')
+        text = Read('test.txt', encoding='gbk')
     except UnicodeDecodeError as e:
         no_raise = False 
     assert not no_raise
