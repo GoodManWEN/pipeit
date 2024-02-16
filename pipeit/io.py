@@ -1,19 +1,26 @@
-def Read(file_name):
-    with open(file_name, 'r', encoding='utf-8') as f:
-        text = f.read()
-    return text
+from io_base import BaseRead, BaseWrite
 
-def Write(file_name, text: str):
-    with open(file_name, 'w', encoding='utf-8') as f:
-        f.write(text)
-    return 
+class Read(BaseRead):
 
-def ReadB(file_name):
-    with open(file_name, 'rb') as f:
-        text = f.read()
-    return text
+    @classmethod
+    def _read_type(cls) -> str:
+        return 'r'
 
-def WriteB(file_name, blob: bytes):
-    with open(file_name, 'wb') as f:
-        f.write(blob)
-    return 
+class ReadB(BaseRead):
+
+    @classmethod
+    def _read_type(cls) -> str:
+        return 'rb'
+
+class Write(BaseWrite):
+
+    @classmethod
+    def _write_type(cls) -> str:
+        return 'w' 
+
+class WriteB(BaseWrite):
+
+    @classmethod
+    def _write_type(cls) -> str:
+        return 'wb' 
+
