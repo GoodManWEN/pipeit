@@ -19,6 +19,21 @@ class AbstractIO(object):
     def __or__(self, other: Any) -> Any:
         raise TypeError("OR operation not allowed")
 
+    @classmethod
+    def _ast_bitor_detect(cls, code: str) -> str:
+        from ast import parse, walk, unparse, Expr, Str, BitOr
+        tree = parse(code)
+        for node in walk(tree):
+            if isinstance(node, BitOr):
+                return True
+        return False 
+
+        # # The following code is used to remove comments from 'code'
+        #     if isinstance(node, Expr) and isinstance(node.value, Str):
+        #         node.value.s = ""
+        # filtered_code = unparse(tree)
+        # return filtered_code
+
 
 class ReadPseudo:
     """Used as input type check"""
@@ -35,21 +50,6 @@ class WritePseudo:
         self._encoding = encoding
 
 
-def _ast_bitor_detect(code: str) -> str:
-    from ast import parse, walk, unparse, Expr, Str, BitOr
-    tree = parse(code)
-    for node in walk(tree):
-        if isinstance(node, BitOr):
-            return True
-    return False 
-
-    # # The following code is used to remove comments from 'code'
-    #     if isinstance(node, Expr) and isinstance(node.value, Str):
-    #         node.value.s = ""
-    # filtered_code = unparse(tree)
-    # return filtered_code
-
-
 class BaseRead(AbstractIO):
 
     @classmethod
@@ -61,7 +61,7 @@ class BaseRead(AbstractIO):
         
         caller_frame = currentframe().f_back
         caller_context = ''.join(getframeinfo(caller_frame).code_context)
-        if _ast_bitor_detect(caller_context.strip()):
+        if cls._ast_bitor_detect(caller_context.strip()):
             return super().__new__(cls)
         else:
             try:
@@ -116,7 +116,7 @@ class BaseWrite(AbstractIO):
 
         caller_frame = currentframe().f_back
         caller_context = ''.join(getframeinfo(caller_frame).code_context)
-        if _ast_bitor_detect(caller_context.strip()):
+        if cls._ast_bitor_detect(caller_context.strip()):
             return super().__new__(cls)
         else:
             try:
