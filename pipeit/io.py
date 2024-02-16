@@ -1,4 +1,4 @@
-from io_base import BaseRead, BaseWrite
+from .io_base import BaseRead, BaseWrite
 
 class Read(BaseRead):
 

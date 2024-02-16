@@ -1,4 +1,4 @@
-import os , sys
+import os, sys
 sys.path.append(os.getcwd())
 import pytest
 from pipeit import *
