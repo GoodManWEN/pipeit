@@ -63,7 +63,7 @@ with timeit(): # a handwritten for loop is required under context manager mode
 
 # output: 
 # [line 5][approximate] time cost / loop: 9.8967234μs
-# [line 8][exact] time cost: 7.0519098s
+# [line 8][exact] time cost: 7.0519098s 
 ```
 
 
