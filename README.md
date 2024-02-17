@@ -76,8 +76,6 @@ with timeit(): # a handwritten for loop is required under context manager mode
 
 Use simple `Read()`/`Write()`/`ReadB()`/`WriteB()` functions instead of the default practice of `with open()`. You can specify the encoding format, but they are specified as `utf-8` by default. Another advantage of doing this is that you no longer need to worry about accidentally emptying the file by not changing 'w' to 'r'.
 
-Similarly, you can use pipes to send data to them, or pipes to receive data from them.
-
 ```Python
 from pipeit import *
 import json
@@ -87,7 +85,9 @@ Write("a.txt", "Hello World!")
 WriteB("b.json", "[1, 2, 3]".encode("utf-8"))
 assert Read("a.txt") == "Hello World!"
 assert ReadB("b.txt") == b"[1, 2, 3]"
-
+```
+Similarly, you can use pipes to send data to them, or pipes to receive data from them.
+```Python
 # OR
 "[1, 2, 3]".encode("utf-8") | WriteB("b.json")
 
