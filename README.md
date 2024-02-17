@@ -100,3 +100,9 @@ json.dumps(htmls) | Write("htmls.json")
 htmls = Read("htmls.json") | json.loads
 html_a, html_b = htmls.values()
 ```
+`>>` and `|` operands are functionally identical while doing IO.
+```
+"Hello World!" >> Write("a.txt")
+text = Read("a.txt") >> str
+assert text == "Hello World!"
+```
