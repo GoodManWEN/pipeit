@@ -199,9 +199,67 @@ def test_read():
         err_msg = str(e)
     assert "OR operation not allowed" in err_msg 
 
+def test_shift():
+    "abc123" >> Write("test.txt")
+    text = Read("test.txt") >> str
+    assert text == "abc123"
+
+    err_msg = ""
+    try:
+        str << Read("test.txt")
+    except TypeError as e:
+        err_msg = str(e)
+    assert "RLSHIFT" in err_msg 
+
+
+    err_msg = ""
+    try:
+        "str" << Read("test.txt")
+    except TypeError as e:
+        err_msg = str(e)
+    assert "RLSHIFT" in err_msg 
+
+    err_msg = ""
+    try:
+        "str" >> Read("test.txt")
+    except TypeError as e:
+        err_msg = str(e)
+    assert "RRSHIFT" in err_msg
+
+
+    err_msg = ""
+    try:
+        Read("test.txt") << "str"
+    except TypeError as e:
+        err_msg = str(e)
+    assert "LSHIFT" in err_msg
+
+    err_msg = ""
+    try:
+        "str" << Write("test.txt")
+    except TypeError as e:
+        err_msg = str(e)
+    assert "RLSHIFT" in err_msg
+
+    err_msg = ""
+    try:
+        Write("test.txt") >> "str"
+    except TypeError as e:
+        err_msg = str(e)
+    assert "RSHIFT" in err_msg
+
+
+    err_msg = ""
+    try:
+        Write("test.txt") << "str"
+    except TypeError as e:
+        err_msg = str(e)
+    assert "LSHIFT" in err_msg
+
 
 # test_write_empty_text()
 # test_write_wrong_type()
 # test_write_encoding()
 # test_write_pipe()
 # test_read()
+# test_shift()

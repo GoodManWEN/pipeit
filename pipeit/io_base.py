@@ -36,11 +36,11 @@ class AbstractIO(object):
         raise TypeError("RLSHIFT operation not allowed")
 
     @classmethod
-    def _ast_bitor_detect(cls, code: str) -> str:
-        from ast import parse, walk, unparse, Expr, Str, BitOr, RShift
+    def _ast_bitor_detect(cls, code: str) -> bool:
+        from ast import parse, walk, unparse, Expr, Str, BitOr, RShift, LShift
         tree = parse(code)
         for node in walk(tree):
-            if isinstance(node, BitOr) or isinstance(node, RShift):
+            if isinstance(node, BitOr) or isinstance(node, RShift) or isinstance(node, LShift):
                 return True
         return False 
 
