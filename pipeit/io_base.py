@@ -13,18 +13,34 @@ class AbstractIO(object):
     def __iter__(self):
         return RuntimeError("Method not allowed")
 
-    def __ror__(self, other: Any) -> Union[int, Any]:
+    def __ror__(self, other: Any) -> Any:
         raise TypeError("ROR operation not allowed")
 
     def __or__(self, other: Any) -> Any:
         raise TypeError("OR operation not allowed")
 
+    def __rshift__(self, other: Any) -> Any:
+        # obj() >> ""
+        raise TypeError("RSHIFT operation not allowed")
+
+    def __lshift__(self, other: Any) -> Any:
+        # obj() << ""
+        raise TypeError("LSHIFT operation not allowed")
+
+    def __rrshift__(self, other: Any) -> Any:
+        # "" >> obj()
+        raise TypeError("RRSHIFT operation not allowed")
+
+    def __rlshift__(self, other: Any) -> Any:
+        # "" << obj()
+        raise TypeError("RLSHIFT operation not allowed")
+
     @classmethod
     def _ast_bitor_detect(cls, code: str) -> str:
-        from ast import parse, walk, unparse, Expr, Str, BitOr
+        from ast import parse, walk, unparse, Expr, Str, BitOr, RShift
         tree = parse(code)
         for node in walk(tree):
-            if isinstance(node, BitOr):
+            if isinstance(node, BitOr) or isinstance(node, RShift):
                 return True
         return False 
 
@@ -97,12 +113,18 @@ class BaseRead(AbstractIO):
         with open(file_name, self.__class__._read_type(), encoding=encoding) as f:
             self._storage = f.read()
 
-    def __or__(self, other: Any):
+    def _opt(self, other:Any) -> Any:
         if isinstance(other, Callable):
             return other(self._storage)
         elif isinstance(other, PipeManagerEnd):
             return self._storage
         return other
+
+    def __or__(self, other):
+        return self._opt(other)
+
+    def __rshift__(self, other):
+        return self._opt(other)
 
 
 class BaseWrite(AbstractIO):
@@ -143,7 +165,7 @@ class BaseWrite(AbstractIO):
         if text is not None:
             raise TypeError("Can't pass in text with pipe and specified text at the same time")
 
-    def __ror__(self, other: Any) -> Union[int, Any]:
+    def _opt(self, other: Any) -> Union[int, Any]:
         if isinstance(other, Union[str, bytes]):
             encoding = None 
             if 'b' not in self.__class__._write_type():
@@ -157,3 +179,9 @@ class BaseWrite(AbstractIO):
             with open(self.file_name, self.__class__._write_type(), encoding=encoding) as f:
                 return f.write(other)
         return other
+
+    def __ror__(self, other):
+        return self._opt(other)
+
+    def __rrshift__(self, other):
+        return self._opt(other)
