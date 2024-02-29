@@ -126,6 +126,9 @@ class BaseRead(AbstractIO):
     def __rshift__(self, other):
         return self._opt(other)
 
+    def __getattr__(self, attr: str) -> Any:
+        return getattr(self._storage, attr)
+
 
 class BaseWrite(AbstractIO):
 
