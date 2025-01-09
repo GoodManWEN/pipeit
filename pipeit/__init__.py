@@ -5,6 +5,7 @@ from .utils import *
 from .wrapper import *
 from .timer import timeit
 from .io import *
+from .decorators import cache, retry
 
 __all__ = (
     'timeit',
@@ -16,5 +17,7 @@ __all__ = (
     'Read',
     'Write',
     'ReadB',
-    'WriteB'
+    'WriteB',
+    'cache',
+    'retry'
 )
